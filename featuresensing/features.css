@@ -1,0 +1,19 @@
+/* 
+    Created on : 16-jan-2014, 14:25:54
+    Author     : cyber02
+*/
+span{
+    display: inline-block;
+}
+.col1 {
+    width: 30em;
+}
+.col2 {
+    width: 5em;
+}
+.support{
+    background-color: limegreen;
+}
+.nosupport{
+    background-color: palevioletred;
+}
