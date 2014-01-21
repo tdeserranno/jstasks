@@ -12,6 +12,16 @@ var arrTags = [
   ["Java", 278, 277],
   ["MySQL", 155, 122]
 ];
+//font classes
+var aoFontClass = {
+  xxsmall : 0.4,
+  xsmall : 0.6,
+  small : 0.8,
+  medium : 1,
+  large : 1.3,
+  xlarge : 1.6,
+  xxlarge : 1.9
+}
 
 //=========WINDOW.ONLOAD========================================================
 window.onload = function() {
@@ -51,6 +61,9 @@ function fnCreateTags(aData, eContainer, nBaseFontSize) {
   //average votecount, needed to calculate representational fontsize for each item
   var nBaseVoteCount = fnCalcBaseVoteCount(arrTags);
   //=======LOGIC===============
+  //set container basefontsize
+  eContainer.style.fontSize = nBaseFontSize;
+  //create tags
   for (var i = 0; i < aData.length; i++) {
     //create span
     var eTagSpan = document.createElement('span');
@@ -58,23 +71,17 @@ function fnCreateTags(aData, eContainer, nBaseFontSize) {
     eTagSpan.className = 'tag';
     //set span content
     eTagSpan.innerHTML = aData[i][0];
-    //set span fontsize
-    eTagSpan.style.fontSize = fnCalcTagFontsize(aData[i], nBaseFontSize, nBaseVoteCount) + 'px';
+    //set span fontclass
+    eTagSpan.className += ' ' + fnCalcTagFontClass(aData[i], nBaseVoteCount);
     //set span color
     eTagSpan.style.color = fnCalcTagColor(aData[i]);
     //position span in container
     fnPositionTag(eTagSpan, eContainer);
     //add span to container
     eContainer.appendChild(eTagSpan);
-    /**
-     * Een betere manier van werken is een aantal vaste CSS classes hebben met
-     *  verschillende fontSizes, ... en die classes toe te kennen ipv fontSize
-     *  en color enz. met inline styles toe te kennen.
-     *  Zo kan je het probleem van te kleine of te grote tags uit de weg gaan.
-     */
   }
 }
-/**Calculate the fontsize for a given cloud item based on the ratio between 
+/**Determine the fontsize class for a given cloud item based on the ratio between 
  * item votecount and basevotecount and the basefontsize
  * 
  * @param {type} aTag , tag data
@@ -82,14 +89,30 @@ function fnCreateTags(aData, eContainer, nBaseFontSize) {
  * @param {type} nBaseVoteCount
  * @returns {Number|fnCalcTagFontsize.fontRatio}
  */
-function fnCalcTagFontsize(aTag, nBaseFontSize, nBaseVoteCount) {
-  var fontSize = nBaseFontSize;
-  var fontRatio = parseInt(aTag[1]) / nBaseVoteCount;
-  fontSize = fontSize * fontRatio;
+function fnCalcTagFontClass(aTag, nBaseVoteCount) {
+  var fontClass = 'medium';
+  var voteRatio = parseInt(aTag[1]) / nBaseVoteCount;
+  voteRatio.toFixed(1);
+  console.log(voteRatio);
+  console.log(voteRatio.toFixed(1));
+  if (voteRatio <= aoFontClass.xxsmall) {
+    fontClass = 'xxsmall';
+  } else if (voteRatio <= aoFontClass.xsmall) {
+    fontClass = 'xsmall';
+  } else if (voteRatio <= aoFontClass.small) {
+    fontClass = 'small';
+  } else if (voteRatio <= aoFontClass.medium) {
+    fontClass = 'medium';
+  } else if (voteRatio <= aoFontClass.large) {
+    fontClass = 'large';
+  } else if (voteRatio <= aoFontClass.xlarge) {
+    fontClass = 'xlarge';
+  } else if (voteRatio <= aoFontClass.xxlarge) {
+    fontClass = 'xxlarge';
+  }
 //  console.log(nBaseFontSize + ' , ' + fontRatio + ' , ' + fontSize);
-  fontSize = Math.round(fontSize);
 //  console.log(fontSize);
-  return fontSize;
+  return fontClass;
 }
 /**Determines tag color based on current votes and previous votes stored in 
  * data array
