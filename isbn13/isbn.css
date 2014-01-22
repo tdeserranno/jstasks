@@ -1,0 +1,8 @@
+div.vb{
+    background-color:#CCFFCC;
+    padding:1em;
+}
+label.error{
+    display: none;
+    color: red;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JS PF project: een ISBN nummer valideren</title>
+
+<link href="isbn.css" rel="stylesheet">
+<script src="isbn.js" type="text/javascript"></script>
+</head>
+<body>
+<h1>JS PF project: een ISBN nummer valideren</h1>
+<form name="frmISBN" action="http://isbndb.com/search-all.html" method="get">
+<p>Vul een ISBN-10 of ISBN-13 nummer in: <input type="text" name="kw" /><input type="submit" value="Valideer"/>
+    <label class="error" id="fout">ongeldig ISBN nummer</label>
+</p>
+</form>
+<p>Enkele testwaarden (geldig en ongeldig):</p>
+<div id="output"></div>
+<p>Geldige isbn-nummers worden doorgestuurd naar isbndb.com. Dat betekent niet dat ze gevonden zullen worden. Ongeldige nummers worden geweigerd.</p>
+
+</body>
+</html>
