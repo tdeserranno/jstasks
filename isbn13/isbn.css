@@ -6,3 +6,9 @@ label.error{
     display: none;
     color: red;
 }
+.geldig{
+    color: green;
+}
+.ongeldig{
+    color: red;
+}

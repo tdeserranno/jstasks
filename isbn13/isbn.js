@@ -29,7 +29,13 @@ window.onload = function(){
   //lijst testwaarden
   var strNummers = "";
   for(var i = 0; i < arrISBN.length; i++){
-    strNummers += arrISBN[i] + "<br />";
+    strNummers += arrISBN[i];
+    if (isValidISBN(arrISBN[i])) {
+      strNummers += ' <span class="geldig">Geldig</span>';
+    } else {
+      strNummers += ' <span class="ongeldig">Niet geldig</span>';
+    }
+    strNummers += "<br />";
   }
   divOutput.innerHTML = strNummers;
   
