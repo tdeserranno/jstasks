@@ -1,10 +1,12 @@
+//^^^^FACTORIAL.JS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//====WINDOW.ONLOAD=============================================================
 window.onload = function() {
   // Elements
-  var button = document.getElementById('deKnop');
+  var eButton = document.getElementById('deKnop');
   var eNumber = document.getElementById('getal');
   var eOutput = document.getElementById('output');
   
-  button.onclick = function() {
+  eButton.addEventListener('click', function() {
     var n = eNumber.value;
     if (n == '' || isNaN(n)) {
       alert('Deze functie werkt enkel met getallen');
@@ -16,8 +18,9 @@ window.onload = function() {
         eOutput.innerHTML = factorial(n);
       }
     }
-  }
+  });
 };
+//====FUNCTIONS=================================================================
 function factorial(number) {
   var result = 1;
   if (number !== 0) {
