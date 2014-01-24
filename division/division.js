@@ -1,3 +1,11 @@
+//^^^^DIVISION.JS^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//====WINDOW.ONLOAD=============================================================
+window.onload = function(){
+    //button
+    var button = document.getElementById('deKnop');
+    button.onclick = calculate;
+};
+//====FUNCTIONS=================================================================
 function divide(deeltal, deler){
     var result = '';
     if (deler === 0){
@@ -27,9 +35,3 @@ function calculate(){
         output.innerHTML = divide(getal1,getal2);
     }
 }
-window.onload = function(){
-    //button
-    var button = document.getElementById('deKnop');
-    button.onclick = calculate;
-}
-;
