@@ -1,38 +1,58 @@
+//**** GLOBALS *****************************************************************
+var baseAmountPerKid = 25;
+//**** WINDOW.ONLOAD ***********************************************************
+window.onload = function(){
+    //button
+    var button = document.getElementById('deKnop');
+    button.onclick = calculate;
+};
+//**** FUNCTIONS ***************************************************************
 function calcBase(kids){
-    var baseResult = 0;
-    var basePerKid = 25;
-    var ontop1 = 12.5;
-    var ontop2 = 7.5;
+    var baseAmount = 0;
+    var amountOntop1 = 12.5;
+    var amountOntop2 = 7.5;
+    var numberOfKidsOntop1 = 3;
+    var numberOfKidsOntop2 = 5;
+    
     for(var i=1; i <= kids;i++){
-        baseResult += basePerKid;
-        if (i > 2) {
-            baseResult += ontop1;
-            if(i > 4){
-                baseResult += ontop2;
+        baseAmount += baseAmountPerKid;
+        if (i >= numberOfKidsOntop1) {
+            baseAmount += amountOntop1;
+            if(i >= numberOfKidsOntop2){
+                baseAmount += amountOntop2;
             }
         }
     }
-    return baseResult;
+    return baseAmount;
 }
 function salaryAdjust(kidscash, salary){
+    var minSalary = 500;
+    var minMultiplier = 1.25;
+    var maxSalary = 2000;
+    var maxMultiplier = 0.65;
+    
     var adjResult = kidscash;
-    if (salary <= 500){
-        adjResult *= 1.25;
+    
+    if (salary <= minSalary){
+        adjResult *= minMultiplier;
     }
-    if (salary >= 2000){
-        adjResult *= 0.65;
+    if (salary >= maxSalary){
+        adjResult *= maxMultiplier;
     }
     return adjResult;
 }
 function checkMinimum(kidscash, kids){
     var minResult = kidscash;
-    var base = kids*25;
+    var base = kids * baseAmountPerKid;
     if (minResult < base) {
         minResult = base;
     }
     return minResult;
 }
 function calculate(){
+    //
+  
+  
     //input elements
     var inputKinderen = document.getElementById('kinderen');
     var inputMaandloon = document.getElementById('maandloon');
@@ -45,22 +65,22 @@ function calculate(){
     var output = document.getElementById('output');
     
     //logic
-    var baseCash = 0;
-    var adjustedCash = 0;
-    var finalCash = 0;
+    var baseKindergeld = 0;
+    var adjustedKindergeld = 0;
+    var finalKindergeld = 0;
     //check if input isn't zero
     if (kinderen > 0){
         if (loon > 0){
             //calculate base cash
-            baseCash = calcBase(kinderen);
-            console.log('base: '+baseCash);
+            baseKindergeld = calcBase(kinderen);
+            console.log('base: '+baseKindergeld);
             //adjust based on salary
-            adjustedCash = salaryAdjust(baseCash, loon);
-            console.log('salaryadjusted: '+adjustedCash);
+            adjustedKindergeld = salaryAdjust(baseKindergeld, loon);
+            console.log('salaryadjusted: '+adjustedKindergeld);
             //check minimum
-            finalCash = checkMinimum(adjustedCash, kinderen);
+            finalKindergeld = checkMinimum(adjustedKindergeld, kinderen);
             //output
-            output.innerHTML = 'Kindergeld = ' + finalCash + '€.';
+            output.innerHTML = 'Kindergeld = ' + finalKindergeld + '€.';
         }else{
             alert('Maandloon is niet correct');
         }
@@ -68,9 +88,3 @@ function calculate(){
         alert('Aantal kinderen is niet correct');
     }
 }
-window.onload = function(){
-    //button
-    var button = document.getElementById('deKnop');
-    button.onclick = calculate;
-}
-;
